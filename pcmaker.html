@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PC Maker</title>
+    <link href="css/bootstrap.darkly.min.css" rel="stylesheet">
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/controller.js"></script>
+
+  </head>
+  <body ng-controller="pcmaker">
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">PC Maker</a>
+          </div>
+
+          <form class="navbar-form navbar-left" role="search" style="width: 40%">
+            <button style="visibility: hidden" type="submit" class="btn btn-default">Submit</button>
+            <div class="navbar-btn checkbox">
+              <label>
+                <input type="checkbox" ng-model="mercadoLivre" ng-change="filterCatalog()"> Mercado Livre
+              </label>
+            </div>
+            <button style="visibility: hidden" type="submit" class="btn btn-default">Submit</button>
+            <div class="navbar-btn checkbox">
+              <label>
+                <input type="checkbox" ng-model="ebay" ng-change="filterCatalog()"> EBay
+              </label>
+            </div>
+          </form>
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="divider"></li>
+              <li class="divider"></li>
+              <li><a href="#">Preço total: R$ {{totalPrice() | number:2}}</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </nav>
+
+      <h4 ng-if="!hasTable()">Não existem componentes.</h4>
+
+      <table class="table" ng-if="hasTable()">
+          <tr class="row">
+              <th class="col-md-3">Quantidade</th>
+              <th class="col-md-3">Tipo</th>
+              <th class="col-md-3">Opção</th>
+              <th class="col-md-3">Preço</th>
+          </tr>
+          <tr ng-repeat="item in items" class="row">
+              <td class="col-md-3"><input type="number" class="form-control" ng-model="item.quantity"/></h4></td>
+              <td class="col-md-3">
+                <select class="form-control" ng-model="item.type" ng-options="type as type.name for type in catalog">
+                  <option value=""/>
+                </select>
+              </td>
+              <td class="col-md-3">
+                <span ng-if="item.definedType()">
+                  <select class="form-control" ng-model="item.option" ng-options="('R$') + (option.price | number: 2) + (option.fare!=undefined ? '+'+(option.fare|number:2) : '') + (' : ') + ( option.description) for option in item.type.options">
+                  </select>
+                </span>
+                <h4 ng-if="!item.definedType()">Selecione o tipo do componente</h4>
+              </td>
+              <td class="col-md-3"><h4>R$ {{ item.price() | number: 2}}</h4></td>
+          </tr>
+      </table>
+
+      <button type="button" class="btn btn-default" ng-click="addItem()">Adicionar item</button>
+  </body>
+</html>
