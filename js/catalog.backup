@@ -1,0 +1,66 @@
+var catalog = [
+		  	{
+		  		required: true,
+		  		name: "Graphical Processing Unit",
+		  		options: [
+		  			{description: "Nvidia Geforce GTX750 1GB GDDR5 1085Mhz", price: 460, fare: 13.67, ebay: false},
+		  			{description: "ZOTAC NVIDIA GeForce GTX 750 1GB GDDR5 DVI/HDMI/DisplayPort pci-e Video", price: 85, ebay: true},
+		  		],
+			},{
+				required: true,
+		  		name: "Computer Processing Unit",
+		  		options: [
+			  		{description: "AMD Buldozer FX 6300 3.5ghz", price: 376, ebay: false},
+			  		{description: "AMD FX-6300 Vishera Six-Core AM3+ CPU Processor 3.5GHz 95W Retail FD6300WMHKBOX", price: 259, ebay: true},
+			  		{description: "Processador Core I7 3770", price: 800, fare: 13.49, ebay: false}
+		  		],
+		  	},{
+		  		required: true,
+		  		name: "Motherboard",
+		  		options: [
+		  			{description: "ASUS M5A78L M LX/BR", price: 190, ebay: false}
+		  		]
+		  	},{
+		  		required: true,
+		  		name: "Case",
+		  		options: [
+		  			{description: "Cougar MX 300", price: 200, ebay: false}
+		  		]
+		  	},{
+		  		required: true,
+		  		name: "RAM",
+		  		options: [
+		  			{description: "DDR3 4gb 1333MHz", price: 180, fare: 18, ebay: false},
+		  			{description: "Corsair DDR3 Vengeance 4GB RAM 1600 MHZ DIMM", price: 126, ebay: true},
+		  		]
+		  	},{
+		  		required: true,
+		  		name: "Hard Disk",
+		  		options: [
+		  			{description: "Hd Hitachi 1tb 1000gb 7200rpm 3.5", price: 175, fare: 10, ebay: false},
+		  		]
+		  	},{
+		  		required: true,
+		  		name: "Power Supply",
+		  		options: [
+		  			{description: "Atx 500w Reais Blue Case Super Silenciosa Com Nf-e", price: 85, ebay: false},
+		  			{description: "Zeus ATX 500W 220V PSU 120mm Silent Fan", price: 59.5, ebay: true},
+		  		]
+		  	},{
+		  		required: false,
+		  		name: "Solid State Driver",
+		  		options: [
+		  			{description: "Kingston V300 120GB Sata 3 - 450 Mb/s", price: 224, fare: 11.06, ebay: false},
+		  			{description: "Kingston V300 120GB Sata 3 - 6GB/SEC", price: 171.21, ebay: true},
+		  			{description: "Kingston V300 240GB", price: 229.93, ebay: true},
+		  			{description: "Kingston V300 240gb 2.5 Sata 3", price: 370, fare: 12.08, ebay: false},
+		  		],
+		  	},{
+		  		required: false,
+		  		name: "Blu-ray",
+		  		options : [
+		  			{description: "Gravador E Leitor Interno De Blu-ray Sata Lg M-disc Preto 3d", price: 260, fare: 11.31, ebay: false},
+		  			{description: "Samsung Desktop Blu-Ray Internal SATA Drive SH-B083A (Black) NEW RETAIL BOX 1 Y", price: 130, fare: 11.31, ebay: true},
+		  		]
+		  	}
+		  ];
