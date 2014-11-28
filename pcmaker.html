@@ -73,40 +73,84 @@
                       </select>
                     </span>
                   </td>
-                  <td class="col-md-2"><h5>R$ {{ item.price() | number: 2}}</h5></td>
+                  <td class="col-md-2"><h5>R$ {{ item.price() | number: 2}} <a ng-show="item.hasLink()" ng-href="{{item.option.link}}" target="_blank">Link</a></h5></td>
               </tr>
           </table>
 
           <button type="button" class="btn btn-default" ng-click="addComponent()">Adicionar componente</button>
+          <button type="buttom" class="btn btn-default" ng-click="open()">Adicionar item ao catálogo</button>
+
+          <div>
+            <div>
+              <script type="text/ng-template" id="modalContent.html">
+                  <div class="modal-header">
+                      <h3 class="modal-title">Adicionar item ao catálogo</h3>
+                  </div>
+                  <div class="modal-body">
+                      <form name="catalogItemForm" class="form-horizontal">
+                          <div class="form-group" ng-class="{ 'has-error': catalogItemForm.description.$invalid }">
+                            <label for="inputDescription" class="col-lg-2 control-label">Descrição</label>
+                            <div class="col-lg-10">
+                              <input required name="description" type="text" class="form-control" id="inputDescription" ng-model="newItem.description" placeholder="Descrição">
+                            </div>
+                          </div>
+
+                          <div class="form-group" ng-class="{ 'has-error': catalogItemForm.type.$invalid }">
+                            <label for="select" class="col-lg-2 control-label">Selects</label>
+                            <div class="col-lg-10">
+                              <select required name="type" class="form-control input-sm" ng-model="newItem.type" ng-options="type.name as type.name for type in catalog">
+                                <option value=""/>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Loja</label>
+                            <div class="col-lg-10">
+                              <div class="checkbox">
+                                <label>
+                                  <input ng-model="newItem.ebay" type="checkbox" id="ebayOption">
+                                  Ebay
+                                </label>
+                              </div>
+                              <div class="checkbox">
+                                <label>
+                                  <input ng-model="newItem.ml" type="checkbox" id="mlOption">
+                                  Mercado Livre
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="form-group" ng-class="{ 'has-error': catalogItemForm.price.$invalid }">
+                            <label class="col-lg-2 control-label">Preço</label>
+                            <div class="input-group col-lg-10">
+                              <span class="input-group-addon">R$</span>
+                              <input ng-pattern="/^\d{0,9}(\,\d{1,9})?$/" required ng-model="newItem.price" name="price" type="text" class="form-control">
+                            </div>
+                          </div>
+
+                          <div class="form-group" ng-class="{ 'has-error': catalogItemForm.fare.$invalid }">
+                            <label class="col-lg-2 control-label">Frete</label>
+                            <div class="input-group col-lg-10">
+                              <span class="input-group-addon">R$</span>
+                              <input ng-pattern="/^\d{0,9}(\,\d{1,9})?$/" ng-model="newItem.fare" name="fare" type="text" class="form-control">
+                            </div>
+                          </div>
+                          
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button class="btn btn-primary" ng-disabled="catalogItemForm.$invalid" ng-click="save()">Salvar</button>
+                      <button class="btn btn-warning" ng-click="cancel()">Cancelar</button>
+                  </div>
+              </script>
+
+          </div>
         </div>
       </div>
-
     </div>
-    <div>
-      <div ng-controller="ModalDemoCtrl">
-        <script type="text/ng-template" id="myModalContent.html">
-            <div class="modal-header">
-                <h3 class="modal-title">Im a modal!</h3>
-            </div>
-            <div class="modal-body">
-                <ul>
-                    <li ng-repeat="item in items">
-                        <a ng-click="selected.item = item">{{ item }}</a>
-                    </li>
-                </ul>
-                Selected: <b>{{ selected.item }}</b>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" ng-click="ok()">OK</button>
-                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-            </div>
-        </script>
-
-        <button class="btn btn-default" ng-click="open()">Open me!</button>
-        <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
-        <button class="btn btn-default" ng-click="open('sm')">Small modal</button>
-        <div ng-show="selected">Selection from a modal: {{ selected }}</div>
-    </div>
+    
     </div>
   </body>
 </html>

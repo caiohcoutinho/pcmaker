@@ -21,6 +21,31 @@ app.use("/catalog", function(req, res, next){
 	});
 });
 
+app.use("/savecatalog", function(req, res, next){
+	req.on('data', function(chunk){
+		var newItem = JSON.parse(chunk).newItem;
+		var option = {
+			description: newItem.description,
+			price: newItem.price,
+			fare: newItem.fare,
+			ebay: newItem.ebay,
+			link: newItem.link,
+		};
+		console.log(option);		
+		var writeResult = db.catalog.update(
+			{name: newItem.type},
+			{
+				$push: {
+					options: option
+				}
+			}
+		);
+		console.log(writeResult);
+		res.write(writeResult);
+		res.end();
+	});
+});
+
 app.use("/favicon.ico",function(req, res, next){
 	res.end();
 });
